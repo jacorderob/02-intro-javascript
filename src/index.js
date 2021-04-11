@@ -1,17 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { getHeroeById } from './bases/08-imp-exp';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// Promises
+/* const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const heroe = getHeroeById(2);
+    resolve(heroe);
+    // reject('No heroe found')
+  }, 2000);
+});
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+promise.then((heroe) => {
+  console.log(heroe)
+})
+.catch(err => console.warn(err)); */
+
+const getHeroeByIdAsync = (id) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const heroe = getHeroeById(id);
+      if (heroe) resolve(heroe);
+      else reject('No heroe available for you...')
+    }, 2000);
+  });
+}
+
+getHeroeByIdAsync(4).then((heroe) => {
+  console.log('Heroe', heroe)
+});
+
